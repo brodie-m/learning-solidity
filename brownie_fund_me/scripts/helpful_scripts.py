@@ -19,6 +19,6 @@ def deploy_mocks():
     print('deploying mocks...')
     if len(MockV3Aggregator) <= 0:
         MockV3Aggregator.deploy(
-            DECIMALS, Web3.toWei(STARTING_PRICE, 'ether'), {"from": get_account()})
+            DECIMALS, STARTING_PRICE, {"from": get_account()})
     print("Mocks deployed!")
     price_feed_address = MockV3Aggregator[-1].address
