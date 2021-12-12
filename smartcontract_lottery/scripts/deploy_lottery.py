@@ -4,8 +4,8 @@ import time
 
 
 def deploy_lottery():
-    account = get_account(id="freecodecamp-account")
-    Lottery.deploy(
+    account = get_account()
+    lottery = Lottery.deploy(
         get_contract("eth_usd_price_feed").address,
         get_contract("vrf_coordinator").address,
         get_contract("link_token").address,
@@ -16,6 +16,7 @@ def deploy_lottery():
             "verify", False)
     )
     print("deployed lottery!")
+    return lottery
 
 
 def enter_lottery():
@@ -28,7 +29,7 @@ def enter_lottery():
 
 
 def start_lottery():
-    account = get_account(id="freecodecamp-account")
+    account = get_account()
     lottery = Lottery[-1]
     starting_tx = lottery.startLottery({"from": account})
     starting_tx.wait(1)

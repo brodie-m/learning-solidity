@@ -36,6 +36,7 @@ contract Lottery is VRFConsumerBase, Ownable {
         CALCULATING_WINNER
     }
     LOTTERY_STATE public lottery_state;
+    event RequestedRandomness(bytes32 requestId);
 
     function enter() public payable {
         //$50 min
@@ -50,7 +51,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     function getEntranceFee() public view returns (uint256) {
         (, int256 price, , , ) = ethUsdPriceFeed.latestRoundData();
         uint256 adjustedPrice = uint256(price) * 10**10; //18 decimals
-        uint256 costToEnter = (usdEntryFee * 10**18) / adjustedPrice;
+        uint256 costToEnter = (usdEntryFee * 10**17) / adjustedPrice;
         return costToEnter;
     }
 
@@ -62,6 +63,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     function endLottery() public {
         lottery_state = LOTTERY_STATE.CALCULATING_WINNER;
         bytes32 requestId = requestRandomness(keyhash, fee);
+        emit RequestedRandomness(requestId);
     }
 
     function fulfillRandomness(bytes32 _requestId, uint256 _randomness)
