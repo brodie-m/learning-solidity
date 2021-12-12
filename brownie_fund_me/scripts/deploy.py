@@ -11,7 +11,8 @@ def deploy_fund_me():
         )]["eth_usd_price_feed"]
     else:
         deploy_mocks()
-    fund_me = FundMe.deploy(MockV3Aggregator[-1].address, {
+        price_feed_address = MockV3Aggregator[-1].address
+    fund_me = FundMe.deploy(price_feed_address, {
                             "from": account}, publish_source=config["networks"][network.show_active()].get("verify"))
     print(f"Contract deployed to {fund_me.address}")
     return fund_me
