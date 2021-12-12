@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 py-solc-x = "*"
+web3 = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
