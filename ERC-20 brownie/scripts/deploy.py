@@ -9,13 +9,5 @@ def deploy_token():
     print(f'contract deployed to {brod_token.address}')
 
 
-def get_reward():
-    account = get_account()
-    brod_token = BrodToken[-1]
-    tx = brod_token.giveMinerReward({"from": account})
-    tx.wait(1)
-    print(f'reward sent to {brod_token.address}')
-
-
 def main():
     deploy_token()
