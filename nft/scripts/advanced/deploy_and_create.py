@@ -1,11 +1,16 @@
-from scripts.helpful_scripts import get_account, OPENSEA_URL
-from brownie import AdvancedCollectible
-
-
-def deploy_and_create():
-    account = get_account()
-    advanced_collectible = AdvancedCollectible.deploy({"from": account})
+from brownie import AdvancedCollectible, accounts, network, config
+from scripts.helpful_scripts import fund_with_link
 
 
 def main():
-    deploy_and_create()
+    dev = accounts.add(config["wallets"]["from_key"])
+    print(network.show_active())
+    advanced_collectible = AdvancedCollectible.deploy(
+        config["networks"][network.show_active()]["vrf_coordinator"],
+        config["networks"][network.show_active()]["link_token"],
+        config["networks"][network.show_active()]["keyhash"],
+        {"from": dev},
+        publish_source=True,
+    )
+    fund_with_link(advanced_collectible.address)
+    return
