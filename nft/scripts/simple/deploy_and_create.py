@@ -1,4 +1,4 @@
-from scripts.helpful_scripts import get_account
+from scripts.helpful_scripts import get_account, OPENSEA_URL
 from brownie import SimpleCollectible
 
 token_uri = "ipfs://QmXbVFrGMuA2x6qjvpaPuBmLSugT1BSUdAZCsdwphNYMtm"
