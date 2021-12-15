@@ -12,10 +12,10 @@ contract TokenFarm is Ownable {
     mapping(address => uint256) public uniqueTokensStaked;
     mapping(address => mapping(address => uint256)) public stakingBalance;
     mapping(address => address) public tokenPriceFeedMapping;
-    IERC20 public dBrodToken;
+    IERC20 public DBrodToken;
 
-    constructor(address _dBrodTokenAddress) public {
-        dBrodToken = IERC20(_dBrodTokenAddress);
+    constructor(address _DBrodTokenAddress) public {
+        DBrodToken = IERC20(_DBrodTokenAddress);
     }
 
     function setPriceFeedContract(address _token, address _priceFeed)
@@ -48,7 +48,7 @@ contract TokenFarm is Ownable {
         for (uint256 i = 0; i < stakers.length; i++) {
             address recipient = stakers[i];
             uint256 userTotalValue = getUserTotalValue(recipient);
-            dBrodToken.transfer(recipient, userTotalValue);
+            DBrodToken.transfer(recipient, userTotalValue);
         }
     }
 
