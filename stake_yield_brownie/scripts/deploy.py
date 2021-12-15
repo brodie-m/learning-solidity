@@ -29,10 +29,17 @@ def deploy_token_farm_and_dBrod_token():
         weth_token: get_contract("eth_usd_price_feed"),
     }
     add_allowed_tokens(token_farm, allowed_tokens, account)
+    return token_farm, dBrod_token
 
 
 def add_allowed_tokens(token_farm, allowed_tokens, account):
-    pass
+    for token in allowed_tokens:
+        add_tx = token_farm.addAllowedTokens(token.address, {"from": account})
+        add_tx.wait(1)
+        set_tx = token_farm.setPriceFeedContract(
+            token.address, allowed_tokens[token], {"from": account})
+        set_tx.wait(1)
+    return token_farm
 
 
 def main():
