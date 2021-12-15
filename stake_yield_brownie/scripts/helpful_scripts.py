@@ -10,6 +10,7 @@ from brownie import (
 )
 from web3 import Web3
 
+
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
     "hardhat", "development", "ganache"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIRONMENTS + [
