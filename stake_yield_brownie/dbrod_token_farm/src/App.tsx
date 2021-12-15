@@ -1,6 +1,7 @@
 import { Container } from '@material-ui/core';
 import React from 'react';
 import Header from './Components/Header';
+import Main from './Components/Main';
 
 
 function App() {
@@ -8,9 +9,7 @@ function App() {
     <div className="App">
       <Header/>
       <Container maxWidth="md">
-        <div>
-          hi
-        </div>
+        <Main/>
       </Container>
     </div>
   );
